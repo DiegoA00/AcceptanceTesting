@@ -7,26 +7,48 @@ Feature: To-Do List Management
 
   Scenario: List all tasks in the to-do list
     Given the to-do list contains tasks:
-      | Task        |
+      | Task         |
       | Buy groceries |
       | Pay bills     |
     When the user lists all tasks
     Then the output should contain:
-      | Task        |
+      | Task         |
       | Buy groceries |
       | Pay bills     |
 
   Scenario: Mark a task as completed
     Given the to-do list contains tasks with status:
-      | Task         | Status  |
-      | Buy groceries | Pending |
+      | Task          | Status   |
+      | Buy groceries | Pending  |
     When the user marks task "Buy groceries" as completed
     Then the to-do list should show task "Buy groceries" as completed
 
   Scenario: Clear the entire to-do list
     Given the to-do list contains tasks:
-      | Task        |
+      | Task         |
       | Buy groceries |
       | Pay bills     |
     When the user clears the to-do list
     Then the to-do list should be empty
+
+  Scenario: View only completed tasks
+    Given the to-do list contains tasks with status:
+      | Task          | Status   |
+      | Buy groceries | Completed |
+      | Pay bills     | Pending   |
+    When the user lists only completed tasks
+    Then the output should contain:
+      | Task          |
+      | Buy groceries |
+
+  Scenario: View only pending tasks
+    Given the to-do list contains tasks with status:
+      | Task          | Status   |
+      | Buy groceries | Completed |
+      | Pay bills     | Pending   |
+      | Clean house   | Pending   |
+    When the user lists only pending tasks
+    Then the output should contain:
+      | Task        |
+      | Pay bills   |
+      | Clean house |
