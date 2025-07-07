@@ -5,13 +5,13 @@ from todo_list_manager import ToDoListManager
 def step_impl(context):
     context.manager = ToDoListManager()
 
-@given('the to-do list contains tasks:')
+@given('the to-do list contains tasks')
 def step_impl(context):
     context.manager = ToDoListManager()
     for row in context.table:
         context.manager.add_task(row['Task'], "desc", "tomorrow", "Medium")
 
-@given('the to-do list contains tasks with status:')
+@given('the to-do list contains tasks with status')
 def step_impl(context):
     context.manager = ToDoListManager()
     for row in context.table:
@@ -48,7 +48,7 @@ def step_impl(context, title):
     titles = [task.title for task in context.manager.list_tasks()]
     assert title in titles
 
-@then('the output should contain:')
+@then('the output should contain')
 def step_impl(context):
     titles = [task.title for task in context.listed_tasks]
     for row in context.table:
